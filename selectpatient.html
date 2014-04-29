@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <link href="/style.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script type="text/javascript">
+        
+            // Once the HTML has loaded, link javascript functions to HTML elements
+            $(document).ready(function () {
+            
+                // Populate Drop Down Menu with users from MySQL
+                $.ajax({
+                    url: "users/select",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    complete: function (data) {
+                        $('div#users').html(data.responseText);
+                    }
+                });
+            
+                // Retrieve data from MySQL for a specific user
+                $('#user-submit').click(function () {
+                    var payload = {
+                        id: $('#user-list').val(),
+                    };
+                    
+                    $.ajax({
+                        url: "/user",
+                        type: "POST",
+                        contentType: "application/json",
+                        processData: false,
+                        data: JSON.stringify(payload),
+                        complete: function (data) {
+                            $('#output').html(data.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Simple Dynamic &lt;select&gt; Example</h1>
+        <h3>Select a User to get their Information</h3>
+        <div id="users"></div>
+        <input id="user-submit" type="submit" />
+        <p id="output"></p>
+    </body>
+</html>

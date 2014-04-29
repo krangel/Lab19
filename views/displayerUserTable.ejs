@@ -1,0 +1,15 @@
+<% include header %> 
+ <% if(rs.length > 0) { %> 
+ <table> 
+ <tr><th>Email</th></tr> 
+ <% for (var i=0; rs.length > i; i++) { %> 
+ <tr> 
+ <td><a href="/user/?userid=<%= rs[i].UserID %> "> <%= rs[i].Email 
+%></a></td> 
+ </tr>  <% } %> 
+ </table> 
+ <% } else { %> 
+ No users are entered into the database. 
+ <% } %> 
+ 
+<% include footer %>

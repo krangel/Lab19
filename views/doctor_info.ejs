@@ -1,0 +1,38 @@
+<% include header %>
+<script type="text/javascript">
+   // Populate Drop Down Menu with users from MySQL
+                    $.ajax({
+                    url: "doctors/select",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    complete: function (data) {
+                        $('div#select').html(data.responseText);
+                    }
+                });
+  
+      $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    drLName: $('#lastname').val()
+                };
+
+		console.log(payload);
+
+                $.ajax({
+                    url: "/doctor_info",
+                    type: "POST",
+                    contentType: "html",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+                    }
+                });
+            });
+        });
+</script>
+	<% include menu %>
+   	   <h3>Select a Doctor for On Call Information</h3>
+	<div id="select"></div>
+<% include footer %>

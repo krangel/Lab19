@@ -1,0 +1,34 @@
+<% include header %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    pFName: $('#firstname').val(),
+                    pLName: $('#lastname').val(),
+                    homeAddress: $('#address').val(),
+                    pPhoneNum: $('#phone').val()
+                };
+
+		console.log(payload);
+
+                $.ajax({
+                    url: "/add_patient",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+<% include menu %>
+      <h3>Enter a patient to enter into the database:</h3>
+      First Name: <input id="firstname" type="text" /> <br />
+      Last Name: <input id="lastname" type="text" /> <br />
+      Address: <input id="address" type="text" /> <br />
+      Phone Number: <input id="phone" type="text" /> <br />
+<input id="user-submit" type="submit" />
+<% include footer %>

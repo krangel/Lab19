@@ -1,0 +1,10 @@
+
+     <input id="user-submit" type="submit" />
+      <p id="output"></p>
+    </div>
+<footer>
+the footer
+</footer>
+  </body>
+</html>
+

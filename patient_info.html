@@ -1,0 +1,30 @@
+<% include header %>
+    <script type="text/javascript">
+      $(document).ready(function () {
+                    // Populate table with patients from MySQL
+                     $.ajax({
+                       url: "/patients/table",
+                       type: "POST",
+                       contentType: "application/json",
+                       processData: false,
+                       complete: function (data) {
+                        $('div#table').html(data.responseText);
+                       }
+      });
+                      $.ajax({
+                      url: "/patient_info",
+                      type: "POST",
+                      contentType: "application/json",
+                      processData: false,
+                      data: JSON.stringify(payload),
+                      complete: function (data) {
+                      $('#output').html(data.responseText);
+                    }
+                });
+             });
+         
+    </script>
+<% include menu %>
+      <h3>Select a Patient to Retrieve Emergency Contact Information</h3>
+      <div id="table"></div>
+<% include footer %>
